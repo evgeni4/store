@@ -12,13 +12,21 @@
     <link rel="shortcut icon" href="{{ asset('back-end/img/icons/icon-48x48.png') }}"/>
 
     <title>{% block page_title %}{{ block('content_title')|striptags|raw }}{% endblock %}</title>
-    {% block head_javascript %}
-        <script src="{{ asset('back-end/js/app.js') }}"></script>
-    {% endblock head_javascript %}
-    {% block head_favicon %}
+    {% block head_stylesheets %}
         <link href="{{ asset('back-end/css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('back-end/css/modalImage.css') }}" rel="stylesheet">
         <link href="{{ asset('back-end/css/font-awesome.min.css') }}" rel="stylesheet">
     {% endblock %}
+
+    {% block configured_stylesheets %}
+        {% for css_asset in ea.assets.cssFiles ?? [] %}
+            <link rel="stylesheet" href="{{ asset(css_asset) }}">
+        {% endfor %}
+    {% endblock %}
+    {% block head_javascript %}
+        <script src="{{ asset('back-end/js/app.js') }}"></script>
+        <script src="{{ asset('back-end/js/modalImage.js') }}"></script>
+    {% endblock head_javascript %}
 </head>
 {% block body %}
 <body>

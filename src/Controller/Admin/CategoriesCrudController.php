@@ -56,7 +56,7 @@ class CategoriesCrudController extends AbstractCrudController
         yield  IdField::new('id')->onlyOnIndex();
         yield  TextField::new('title');
         yield  AssociationField::new('user')->onlyOnIndex();
-        yield  ChoiceField::new('categories', 'Parent')
+        yield  ChoiceField::new('parentId', 'Parent')
         ->setChoices($this->category->catEditAdmin());
         yield    BooleanField::new('published');
         yield   DateTimeField::new('createDate', 'Create date')
