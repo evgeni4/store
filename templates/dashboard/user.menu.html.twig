@@ -1,0 +1,73 @@
+{% block usernav %}
+    <div class="col-xl-3 col-lg-3 col-md-12 col-12">
+        <div class="shop-left-area">
+            <div class="avatar-user">
+                {% if app.user.avatar =="0" %}
+                    <div class="empty-avatar"><p>{{ user.firstName|first }}.{{ user.lastName|first }}</p></div>
+                {% else %}
+                    <img style="width: 150px;margin: 10px 0px;" src="{{ asset('uploads/user_image/'~ app.user.avatar) }}"
+                         class="img-rounded" alt="Cinque Terre">
+
+                {% endif %}
+            </div>
+            <!-- single-shop-start -->
+            <div class="single-shop mb-40">
+                <div class="Categories-title">
+                    <h3>User menu</h3>
+                </div>
+                <div class="Categories-list">
+                    <ul class="nav nav-pills flex-column">
+                        <li><a href="{{ path('user_office') }}"><i class="fa fa-dashboard" aria-hidden="true"></i> Dashboard</a>
+                        </li>
+                        <li class="nav-item dd">
+                            <a  class="nav-link collapsed" href="#submenu1" data-toggle="collapse" data-target="#submenu1">
+                                <i class="fa fa-user" aria-hidden="true"></i> Profile</a>
+                            <div class="collapse" id="submenu1" aria-expanded="false">
+                                <ul class="flex-column pl-2 nav">
+                                    <li><a href="{{ path('user_profile') }}"><i class="fa fa-user" aria-hidden="true"></i> View
+                                            profile</a>
+                                    </li>
+                                    <li><a href="{{ path('profile_edit') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update</a>
+                                    </li>
+                                    <li><a href="{{ path('change_password') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Change password</a>
+                                    </li>
+{#                                    <li class="nav-item">#}
+{#                                        <a class="nav-link collapsed py-0" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1">Customers</a>#}
+{#                                        <div class="collapse small" id="submenu1sub1" aria-expanded="false">#}
+{#                                            <ul class="flex-column nav pl-4">#}
+{#                                                <li class="nav-item">#}
+{#                                                    <a class="nav-link p-0" href="">#}
+{#                                                        <i class="fa fa-fw fa-clock-o"></i> Daily#}
+{#                                                    </a>#}
+{#                                                </li>#}
+{#                                                <li class="nav-item">#}
+{#                                                    <a class="nav-link p-0" href="">#}
+{#                                                        <i class="fa fa-fw fa-dashboard"></i> Dashboard#}
+{#                                                    </a>#}
+{#                                                </li>#}
+{#                                                <li class="nav-item">#}
+{#                                                    <a class="nav-link p-0" href="">#}
+{#                                                        <i class="fa fa-fw fa-bar-chart"></i> Charts#}
+{#                                                    </a>#}
+{#                                                </li>#}
+{#                                                <li class="nav-item">#}
+{#                                                    <a class="nav-link p-0" href="">#}
+{#                                                        <i class="fa fa-fw fa-compass"></i> Areas#}
+{#                                                    </a>#}
+{#                                                </li>#}
+{#                                            </ul>#}
+{#                                        </div>#}
+{#                                    </li>#}
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i> Wishlist (16)</a></li>
+                        <li><a href="#"><i class="fa fa-money" aria-hidden="true"></i> Orders</a></li>
+                        <li><a href="{{ path('logout') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock usernav %}

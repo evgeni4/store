@@ -1,0 +1,44 @@
+{% for msg in app.session.flashBag.get('errors') %}
+    <div id="message" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header modal-header-error justify-content-center">
+                    <div class="box-message">
+                        <div class="icon-box-error">
+                            <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Oops!</h4>
+                    <h5><b>{{ msg}} </b></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+    {% for msg in app.session.flashBag.get('success') %}
+        <div id="message" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center">
+                        <div class="box-message">
+                            <div class="icon-box" >
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">
+                            &times;
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h5><b>{{ msg }}</b></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}

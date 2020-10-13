@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block main %}
+    <!-- breadcrumbs-area-start -->
+    <div class="breadcrumbs-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-content text-center">
+                        <h2>My Profile</h2>
+                        <ul>
+                            <li><a href="{{ path('user_office') }}">Dashboard /</a></li>
+                            <li class="active"><a href="#">Profile</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumbs-area-end -->
+    <!-- shop-main-area-start -->
+    <div class="shop-main-area">
+        <!-- user-login-area-start -->
+        <div class="user-login-area">
+            <div class="container">
+                <div class="row">
+                    {% block usernav %}
+                        {% include 'dashboard/user.menu.html.twig' %}
+                    {% endblock usernav %}
+                    <div class="col-xl-9 col-lg-9 col-md-12 col-12 pull-right">
+                        <div class="billing-fields">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+                                    <div class="form-group">
+                                        <label for="">First name :
+                                            <strong>{{ user.firstName|capitalize }}</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Last name :
+                                            <strong>{{ user.lastName|capitalize }}</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Email : <strong>{{ user.email }}</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Phone : <strong>{{ user.phone }}</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Country : <strong>{{ user.country.name|capitalize }}</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">State : <strong>{{ user.state.name|capitalize }}</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">City : <strong>{{ user.cityTown|capitalize }}</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Address : <strong>{{ user.address }}</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Zip : <strong>{{ user.postCode }}</strong></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- user-login-area-end -->
+    </div>
+
+    <!-- shop-main-area-end -->
+{% endblock %}

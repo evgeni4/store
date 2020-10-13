@@ -1,0 +1,3 @@
+#twig:
+#    form_themes:
+#        - DependentSelectBundle::fields.html.twig

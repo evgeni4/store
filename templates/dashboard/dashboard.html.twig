@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block main %}
+    <!-- breadcrumbs-area-start -->
+    <div class="breadcrumbs-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-content text-center">
+                        <h2>Dashboard</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumbs-area-end -->
+    <!-- shop-main-area-start -->
+    <div class="shop-main-area">
+        <!-- user-login-area-start -->
+        <div class="user-login-area">
+            <div class="container">
+                <div class="row">
+                    {% block usernav %}
+                        {% include 'dashboard/user.menu.html.twig' %}
+                    {% endblock usernav %}
+                    <div class="col-xl-9 col-lg-9 col-md-12 col-12 pull-right">
+                        <div class="billing-fields">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

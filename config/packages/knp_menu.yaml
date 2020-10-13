@@ -1,0 +1,15 @@
+knp_menu:
+  twig:
+    template: knp_menu.html.twig
+
+parameters:
+  knp_menu.renderer.twig.options:
+    currentClass: sel
+
+services:
+  app.knp.sidebar_menu:
+    class: Knp\Menu\MenuItem
+    factory: ['@App\Menu\MenuBuilder', createSidebarMenu]
+    arguments: ["@request_stack"]
+    tags:
+      - { name: knp_menu.menu, alias: sidebar_menu }
