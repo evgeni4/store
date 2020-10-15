@@ -1,6 +1,7 @@
 twig:
     globals:
         categories: '@App\Service\Categories\CategoriesService'
+        settings: '@App\Service\Settings\SettingsService\SettingsService'
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'

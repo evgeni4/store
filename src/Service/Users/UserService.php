@@ -73,10 +73,25 @@ class UserService implements UserServiceInterface
         $user->setCountry($user->getState()->getCountry());
         return $this->userRepository->update($user);
     }
-    public function updatePassword(User $user,$password): bool
+
+    public function updatePassword(User $user, $password): bool
     {
         $passwordHash = $this->encryptService->hash($password);
         $user->setPassword($passwordHash);
         return $this->userRepository->update($user);
+    }
+
+    public function customerFindAll()
+    {
+        $customer = $this->userRepository->findAll();
+        $count = 0;
+        foreach ($customer as $key => $item) {
+            foreach ($item->getRoles() as $role) {
+                if ($role=='ROLE_USER') {
+                    $count++;
+                }
+            }
+        }
+        return $count;
     }
 }

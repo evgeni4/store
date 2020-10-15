@@ -31,7 +31,9 @@ class CategoriesService implements CategoriesServiceInterface
         }
         $treeElement = $menu[0];
         $this->generateElemTree($treeElement, $menu);
+
         return $treeElement;
+
     }
 
     public function generateElemTree(&$treeElement, $menu)
@@ -49,13 +51,16 @@ class CategoriesService implements CategoriesServiceInterface
 
     public function catEditAdmin()
     {
-        $dadaArray = $this->categoriesRepository->findAll();
+
+        $dadaArray = $this->menu();
         $data ['No parent'] = 0;
         foreach ($dadaArray as $item) {
-            if ($item->getParentId() !== null) {
-                $data[$item->getTitle()] = $item->getParentId();
+            $data [$item['title']] = $item['id'];
+            if (count($item['children'])>0) {
+                foreach ( $item['children'] as $child) {
+                    $data ['-- '.$child['title']] = $child['id'];
+               }
             }
-            $data[$item->getTitle()] = $item->getId();
         }
         return $data;
     }

@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Categories;
+use App\Entity\Settings;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
@@ -14,6 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class DashboardController extends AbstractDashboardController
 {
+
     /**
      * @Route("/office", name="office")
      */
@@ -28,7 +31,7 @@ class DashboardController extends AbstractDashboardController
             ->addMenuItems([
                 //  MenuItem::linktoDashboard('__ea__page_title.dashboard', 'fa fa-home'),
                 //MenuItem::linkToRoute('My Profile', 'fa fa-id-card', 'user', ['...' => '...'])
-                  // MenuItem::linkToRoute('My Profile', 'fa fa-user', 'user_profile', []),
+                // MenuItem::linkToRoute('My Profile', 'fa fa-user', 'user_profile', []),
                 // MenuItem::linkToLogout('Settings', 'fa fa-sign-out')
             ]);
     }
@@ -36,7 +39,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Admin panel</br>'.$this->getUser());
+            ->setTitle('Admin panel</br>' . $this->getUser());
     }
 
     public function configureMenuItems(): iterable
@@ -51,16 +54,8 @@ class DashboardController extends AbstractDashboardController
                             ->setCssClass('sidebar-link',)
                     ]
                 ),
-            MenuItem::subMenu('Categories', 'fa fa-folder')
-                ->setCssClass('sidebar-link collapsed')
-                ->setSubItems(
-                    [
-                        MenuItem::linkToCrud('List', 'fa fa-list', Categories::class)
-                            ->setCssClass('sidebar-link',),
-//                        MenuItem::linkToUrl('Add', 'fa fa-plus-circle', 'new')
-//                            ->setCssClass('sidebar-link',)
-                    ]
-                ),
+            MenuItem::linkToCrud('Settings', 'fa fa-cogs', Settings::class)
+                ->setCssClass('sidebar-link'),
             MenuItem::linkToLogout('Logout', 'fa fa-sign-out',)->setCssClass('sidebar-link collapsed')
 
         ];

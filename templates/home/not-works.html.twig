@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{% block title %}The site is undergoing technical works!{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('front-layout/img/favicon.png') }}">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="{{ asset('front-layout/js/jquery-1.11.1.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" media="screen" href="{{ asset('front-layout/convas/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('front-layout/css/bootstrap.min.css') }}">
+    <style>
+
+
+        body {
+            align-items: center;
+            background-color: #401055;
+            display: flex;
+            font-family: -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Oxygen-Sans,
+            Ubuntu,
+            Cantarell,
+            "Helvetica Neue",
+            sans-serif;
+        }
+
+        .container {
+            color: #fff;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: normal;
+            letter-spacing: .125rem;
+            text-transform: uppercase;
+        }
+
+        li {
+            display: inline-block;
+            font-size: 1.5em;
+            list-style-type: none;
+            padding: 1em;
+            text-transform: uppercase;
+        }
+
+        li span {
+            display: block;
+            font-size: 4.5rem;
+        }
+
+        .message {
+            font-size: 4rem;
+        }
+
+        #content {
+            display: none;
+            padding: 1rem;
+        }
+
+        .emoji {
+            padding: 0 .25rem;
+        }
+
+        @media all and (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            li {
+                font-size: 1.125rem;
+                padding: .75rem;
+            }
+
+            li span {
+                font-size: 3.375rem;
+            }
+        }
+    </style>
+</head>
+<body  >
+<div id="particles-js" class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col">
+            <h1 id="headline">{{ settings.oneFind.message }}</h1>
+            <div id="countdown">
+                <ul>
+                    <li><span id="days"></span>days</li>
+                    <li><span id="hours"></span>Hours</li>
+                    <li><span id="minutes"></span>Minutes</li>
+                    <li><span id="seconds"></span>Seconds</li>
+                </ul>
+            </div>
+            <div class="message">
+                <div id="content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('front-layout/convas/js/particles.js') }}"></script>
+<script src="{{ asset('front-layout/convas/js/app.js') }}"></script>
+
+<!-- stats.js -->
+<script>
+    var count_particles, stats, update;
+    stats = new Stats;
+    stats.setMode(0);
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+    document.body.appendChild(stats.domElement);
+    count_particles = document.querySelector('.js-count-particles');
+    update = function () {
+        stats.begin();
+        stats.end();
+        if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+            count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+        }
+        requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+</script>
+<script>
+    (function () {
+        const second = 1000,
+            minute = second * 60,
+            hour = minute * 60,
+            day = hour * 24;
+
+        let birthday = '{{ settings.oneFind.endDate|date('M d, yy H:i') }}',
+            countDown = new Date(birthday).getTime(),
+            x = setInterval(function () {
+                let now = new Date(),
+                    distance = countDown - now;
+
+                document.getElementById("days").innerText = Math.floor(distance / (day)),
+                    document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+                    document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+                    document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+
+                //do something later when date is reached
+                if (distance < 0) {
+                    let headline = document.getElementById("headline"),
+                        countdown = document.getElementById("countdown"),
+                        content = document.getElementById("content");
+
+                    headline.innerText = "";
+                    countdown.style.display = "none";
+                    content.style.display = "block";
+                    clearInterval(x);
+                    window.location.assign("{{ path('status_upd') }}");
+                }
+                //seconds
+            }, 0)
+    }());
+</script>
+</body>
+</html>

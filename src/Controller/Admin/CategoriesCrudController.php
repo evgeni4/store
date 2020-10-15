@@ -19,7 +19,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 class CategoriesCrudController extends AbstractCrudController
 {
     /**
-     * @var Categories $category
+     * @var CategoriesService $category
      */
     private $category;
 
@@ -58,9 +58,9 @@ class CategoriesCrudController extends AbstractCrudController
         yield  AssociationField::new('user')->onlyOnIndex();
         yield  ChoiceField::new('parentId', 'Parent')
         ->setChoices($this->category->catEditAdmin());
-        yield    BooleanField::new('published');
         yield   DateTimeField::new('createDate', 'Create date')
             ->setFormat('dd/MM/yyyy H:mm');
+        yield    BooleanField::new('published');
 
     }
 

@@ -26,9 +26,15 @@
 <body class="login">
 <!-- page-wraper-start -->
 <div id="page-wraper-2">
-    {% block header %}
+
         <!-- header-area-start -->
         <header>
+            {% block header %}
+            {% if settings.oneFind.status is same as(false) %}
+                <script>
+                    window.location.assign("{{ path('home') }}");
+                </script>
+            {% endif %}
             <!-- header-top-area-start -->
             <div class="header-top-area" id="sticky-header">
                 <div class="container">
@@ -36,7 +42,13 @@
                         <div class="col-xl-2 col-lg-2 col-md-6 col-6">
                             <!-- logo-area-start -->
                             <div class="logo-area">
-                                <a href="/"><img src="{{ asset('front-layout/img/logo/1.png') }}" alt="logo"/></a>
+                                {% if settings.oneFind.thumbnail %}
+                                    <a href="/"><img src="{{ asset('uploads/logo_sile/'~settings.oneFind.thumbnail) }}"
+                                                     alt="logo"/></a>
+                                {% else %}
+                                    <b>Your company logo</b>
+                                {% endif %}
+
                             </div>
                             <!-- logo-area-end -->
                         </div>
@@ -47,11 +59,11 @@
                                     <ul>
                                         <li><a href="/">Home</a></li>
                                         {% for cat in categories.menu %}
-                                            <li><a href="/"> {{ cat.title }}</a>
+                                            <li><a href="{{ cat.id }}"> {{ cat.title }}</a>
                                             {% if cat.children|length > 0 %}
                                                 <ul class="sub-menu">
                                                     {% for sub in cat.children %}
-                                                        <li><a href="/"> {{ sub.title }}</a></li>
+                                                        <li><a href="{{ sub.id }}"> {{ sub.title }}</a></li>
                                                     {% endfor %}
                                                 </ul>
                                                 </li>
@@ -208,9 +220,13 @@
                 <div class="row">
                     <div class="col-xl-3 col-lg-3 col-md-3 col-12">
                         <!-- footer-logo-start -->
-                        <div class="footer-logo mb-3">
-                            <a href="#"><img src="{{ asset('front-layout/img/logo/2.png') }}" alt="logo"/></a>
-                        </div>
+                        {# <div class="footer-logo mb-3"> #}
+                        {# {% if setting.thumbnail is not null %} #}
+                        {# <a href="/"><img src="{{ asset('uploads/logo_sile/'~setting.thumbnail) }}" alt="logo"/></a> #}
+                        {# {% else %} #}
+                        {# <b>Your company logo</b> #}
+                        {# {% endif %} #}
+                        {# </div> #}
                         <!-- footer-logo-end -->
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-12">
@@ -275,11 +291,11 @@
     <!-- main js -->
     <script src="{{ asset('front-layout/js/main.js') }}"></script>
     <script>
-        $(document).ready(function(){
-            $('.not_word').on('keypress', function() {
+        $(document).ready(function () {
+            $('.not_word').on('keypress', function () {
                 var that = this;
 
-                setTimeout(function() {
+                setTimeout(function () {
                     var res = /[^0-9 ]/g.exec(that.value);
                     console.log(res);
                     that.value = that.value.replace(res, '');
@@ -288,11 +304,11 @@
         });
     </script>
     <script>
-        $(document).ready(function(){
-            $('.not_number').on('keypress', function() {
+        $(document).ready(function () {
+            $('.not_number').on('keypress', function () {
                 var that = this;
 
-                setTimeout(function() {
+                setTimeout(function () {
                     var res = /[^a-zA-Zа-яА-Я]/g.exec(that.value);
                     console.log(res);
                     that.value = that.value.replace(res, '');
